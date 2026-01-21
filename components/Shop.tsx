@@ -229,10 +229,11 @@ export const Shop: React.FC = () => {
   const scanlineY = useSpring(useTransform(mouseY, [-0.5, 0.5], ['0%', '100%']), { stiffness: 50, damping: 20 });
 
   return (
-    <div className="bg-black min-h-screen pt-20" onMouseMove={handleMouseMove}>
+    <div className="bg-black min-h-screen" onMouseMove={handleMouseMove}>
       
       {/* --- NEW MODERN HERO SECTION --- */}
-      <section ref={heroRef} className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden">
+      {/* Refactored to use Flexbox on both mobile and desktop for stability */}
+      <section ref={heroRef} className="relative min-h-[100dvh] flex flex-col overflow-hidden pt-28 pb-12 md:pt-32 md:pb-12">
         
         {/* 1. Dynamic Grid Background */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b98108_1px,transparent_1px),linear-gradient(to_bottom,#10b98108_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none"></div>
@@ -250,14 +251,14 @@ export const Shop: React.FC = () => {
         />
 
         {/* 5. Main Content Container */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 h-full flex flex-col justify-center py-12 md:py-0">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 flex-1 flex flex-col justify-between">
             
             {/* Top HUD Bar */}
             <motion.div 
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                className="absolute top-4 md:top-12 left-6 right-6 flex justify-between items-center text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest border-b border-white/5 pb-4"
+                className="w-full flex justify-between items-center text-[10px] font-mono text-emerald-500/60 uppercase tracking-widest border-b border-white/5 pb-4"
             >
                 <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
@@ -269,43 +270,43 @@ export const Shop: React.FC = () => {
                 </div>
             </motion.div>
 
-            {/* Typography */}
-            <div className="flex flex-col items-start relative mt-8 md:mt-0">
-                 <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="flex items-center gap-4 mb-4"
-                 >
-                    <div className="px-3 py-1 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-widest">
-                        Index v2.0
-                    </div>
-                    <div className="h-px w-20 bg-emerald-500/30" />
-                 </motion.div>
+            {/* Typography - Centered Flexibly */}
+            <div className="flex-1 flex flex-col justify-center items-center md:items-start relative w-full my-8 md:my-0">
+                     <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="flex items-center gap-4 mb-4"
+                     >
+                        <div className="px-3 py-1 border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono uppercase tracking-widest">
+                            Index v2.0
+                        </div>
+                        <div className="h-px w-20 bg-emerald-500/30" />
+                     </motion.div>
 
-                 <motion.h1
-                    style={{ x: heroTextX, y: heroTextY }}
-                    className="text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-display font-bold text-white leading-[0.9] tracking-tighter mb-6 md:mb-8 mix-blend-screen"
-                 >
-                    MOLECULAR <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-emerald-200 to-white">
-                        CATALOG
-                    </span>
-                 </motion.h1>
+                     <motion.h1
+                        style={{ x: heroTextX, y: heroTextY }}
+                        className="text-5xl sm:text-7xl md:text-9xl lg:text-[11rem] font-display font-bold text-white leading-[0.9] tracking-tighter mb-6 md:mb-8 mix-blend-screen text-center md:text-left"
+                     >
+                        MOLECULAR <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-emerald-200 to-white">
+                            CATALOG
+                        </span>
+                     </motion.h1>
 
-                 <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                    className="max-w-xl text-base md:text-lg text-gray-400 font-light border-l border-white/20 pl-6 ml-2"
-                 >
-                    Access purified peptide sequences for advanced laboratory research. <br className="hidden sm:block" />
-                    <span className="text-emerald-500">Full traceability from synthesis to vial.</span>
-                 </motion.p>
+                     <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="max-w-xl text-base md:text-lg text-gray-400 font-light border-l border-white/20 pl-6 ml-2 text-left"
+                     >
+                        Access purified peptide sequences for advanced laboratory research. <br className="hidden sm:block" />
+                        <span className="text-emerald-500">Full traceability from synthesis to vial.</span>
+                     </motion.p>
             </div>
 
             {/* Bottom Interaction Area */}
-            <div className="absolute bottom-8 md:bottom-24 w-full left-0 px-4 sm:px-6">
+            <div className="w-full">
                 <div className="flex flex-col md:flex-row items-end justify-between gap-6 md:gap-8 border-t border-white/10 pt-6 md:pt-8">
                     
                     {/* Search Module */}
@@ -345,7 +346,7 @@ export const Shop: React.FC = () => {
 
         </div>
 
-        {/* Decorative HUD Elements */}
+        {/* Decorative HUD Elements - Absolute positioned on desktop for aesthetic only, not content */}
         <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8 items-end pointer-events-none opacity-50">
              <Database className="w-6 h-6 text-emerald-500/40" />
              <Cpu className="w-6 h-6 text-emerald-500/40" />
