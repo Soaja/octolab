@@ -58,33 +58,36 @@ export const Navbar: React.FC = () => {
               backdrop-blur-xl border 
               transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]
               ${isScrolled 
-                ? 'w-[90vw] md:w-[600px] h-14 rounded-full px-6 bg-black border-white/20 shadow-[0_0_40px_-10px_rgba(16,185,129,0.15)]' 
+                ? 'w-[92vw] md:w-[700px] h-14 rounded-full px-4 bg-black border-white/20 shadow-[0_0_40px_-10px_rgba(16,185,129,0.15)]' 
                 : 'w-[95vw] md:w-[900px] h-20 rounded-full px-8 bg-black/40 border-white/5 shadow-none'
               }
             `}
           >
-            {/* Logo Area */}
-            <Link to="/" className="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-              <div className={`
-                relative flex items-center justify-center rounded-full transition-all duration-500
-                ${isScrolled ? 'w-9 h-9 bg-emerald-500/10' : 'w-10 h-10 bg-emerald-500/20'}
-              `}>
-                <Octagon className={`text-emerald-500 transition-all duration-500 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
-                <div className="absolute inset-0 bg-emerald-500/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
-              
-              <div className="flex flex-col justify-center">
-                <span className={`font-display font-bold text-white tracking-tight leading-none transition-all duration-500 ${isScrolled ? 'text-lg' : 'text-lg'}`}>
-                  OCTO
-                </span>
-                <span className={`text-[9px] text-gray-500 font-mono tracking-widest uppercase transition-all duration-500 ${isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'h-auto opacity-100'}`}>
-                   Lab
-                </span>
-              </div>
-            </Link>
+            {/* Logo Area - Left Side (Flex-1 ensures it pushes nav to center) */}
+            <div className="flex-1 flex justify-start items-center min-w-0">
+              <Link to="/" className="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+                <div className={`
+                  relative flex items-center justify-center rounded-full transition-all duration-500
+                  ${isScrolled ? 'w-8 h-8 bg-emerald-500/10' : 'w-10 h-10 bg-emerald-500/20'}
+                `}>
+                  <Octagon className={`text-emerald-500 transition-all duration-500 ${isScrolled ? 'w-4 h-4' : 'w-5 h-5'}`} />
+                  <div className="absolute inset-0 bg-emerald-500/20 blur-md rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                
+                {/* Text hides on scroll to prevent overlap */}
+                <div className={`flex flex-col justify-center transition-all duration-500 overflow-hidden whitespace-nowrap ${isScrolled ? 'opacity-0 w-0 scale-95' : 'opacity-100 w-auto scale-100'}`}>
+                  <span className="font-display font-bold text-white tracking-tight leading-none text-lg">
+                    OCTO
+                  </span>
+                  <span className="text-[9px] text-gray-500 font-mono tracking-widest uppercase">
+                     Lab
+                  </span>
+                </div>
+              </Link>
+            </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center absolute left-1/2 -translate-x-1/2">
+            {/* Desktop Navigation - Centered (Removed absolute positioning) */}
+            <div className="hidden md:flex items-center shrink-0">
                <div className={`
                  flex items-center gap-1 p-1 rounded-full transition-all duration-500
                  ${isScrolled ? 'bg-transparent' : 'bg-white/5 border border-white/5'}
@@ -96,7 +99,7 @@ export const Navbar: React.FC = () => {
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                     className={`
-                      relative px-5 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap
+                      relative px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 whitespace-nowrap
                       ${isScrolled 
                         ? 'text-white hover:text-emerald-400'
                         : 'text-gray-300 hover:text-white'
@@ -119,9 +122,9 @@ export const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Actions */}
-            <div className="flex items-center gap-3">
-              <div className={`hidden md:flex items-center gap-2 border-r border-white/10 pr-4 mr-2 transition-opacity duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden pr-0 mr-0' : 'opacity-100'}`}>
+            {/* Right Actions - Right Side (Flex-1) */}
+            <div className="flex-1 flex justify-end items-center gap-3 min-w-0">
+              <div className={`hidden md:flex items-center gap-2 border-r border-white/10 pr-4 mr-2 transition-all duration-300 ${isScrolled ? 'opacity-0 w-0 overflow-hidden pr-0 mr-0' : 'opacity-100'}`}>
                  <button className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-full transition-all">
                     <Search className="w-4 h-4" />
                  </button>
@@ -135,7 +138,7 @@ export const Navbar: React.FC = () => {
                 onClick={toggleCart}
                 className={`
                   relative flex items-center justify-center rounded-full transition-all duration-300 group
-                  ${isScrolled ? 'w-9 h-9 bg-white text-black hover:scale-105' : 'w-10 h-10 bg-white text-black hover:bg-emerald-400 hover:scale-105'}
+                  ${isScrolled ? 'w-8 h-8 bg-white text-black hover:scale-105' : 'w-10 h-10 bg-white text-black hover:bg-emerald-400 hover:scale-105'}
                 `}
               >
                 <ShoppingBag className="w-4 h-4" />
